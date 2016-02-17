@@ -40,8 +40,16 @@ task :cron => ["db:load_config"] do
         feed.items.each do |item|
           if type.eql? :atom
             puts " - Item: #{item.title.content}, #{item.link.href}, #{item.content.content.length}"
+            p = Post.find_or_create_by(url: item.link.href)
+            p.title = item.title.content
+            p.content = item.content.content
+            p.save
           elsif type.eql? :rss
             puts " - Item: #{item.title}, #{item.link}, #{item.description.length}"
+            p = Post.find_or_create_by(url: item.link)
+            p.title = item.title
+            p.content = item.description
+            p.save
           end
         end
       end
