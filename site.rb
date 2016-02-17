@@ -1,7 +1,15 @@
 require "rubygems"
 require "bundler"
-Bundler.require(:default, ENV["RACK_ENV"] || :development)
+RACK_ENV = (ENV['RACK_ENV'] || :development).to_sym
+Bundler.require(:default, RACK_ENV)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
+
+require "rss"
+require "set"
+require "logger"
+
+require "./lib/logging.rb"
+require "./lib/scss_init.rb"
 
 class RingClub < Sinatra::Base
   register ScssInitializer
@@ -9,7 +17,6 @@ class RingClub < Sinatra::Base
 
   layout :main
   configure do
-    RACK_ENV = (ENV['RACK_ENV'] || :development).to_sym
     connections = {
       :development => "postgres://localhost/ringclub",
       :test => "postgres://postgres@localhost/ringclub_test",
