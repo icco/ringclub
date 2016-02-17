@@ -43,12 +43,14 @@ task :cron => ["db:load_config"] do
             p = Post.find_or_create_by(url: item.link.href)
             p.title = item.title.content
             p.content = item.content.content
+            p.posted_at = item.updated.content
             p.save
           elsif type.eql? :rss
             puts " - Item: #{item.title}, #{item.link}, #{item.description.length}"
             p = Post.find_or_create_by(url: item.link)
             p.title = item.title
             p.content = item.description
+            p.posted_at = item.pubDate
             p.save
           end
         end
