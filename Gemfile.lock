@@ -18,6 +18,7 @@ GEM
     arel (6.0.3)
     ast (2.2.0)
     builder (3.2.2)
+    chronic (0.10.2)
     daemons (1.2.3)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
@@ -54,6 +55,7 @@ GEM
     oj (2.14.4)
     parser (2.3.0.6)
       ast (~> 2.2)
+    pg (0.18.4)
     powerpack (0.1.1)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -80,6 +82,9 @@ GEM
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    sinatra-activerecord (2.0.9)
+      activerecord (>= 3.2)
+      sinatra (~> 1.0)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -96,16 +101,21 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bundler
+  chronic
   erubis (~> 2.7)
   faraday
   heroku
+  json
   nokogiri
   oj
+  pg
+  rack-protection
   rake
   rubocop
   sass
   shotgun
   sinatra
+  sinatra-activerecord
   thin
 
 BUNDLED WITH
