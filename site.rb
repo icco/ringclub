@@ -3,7 +3,7 @@ require "bundler"
 Bundler.require(:default, ENV["RACK_ENV"] || :development)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
-class Inspiration < Sinatra::Base
+class RingClub < Sinatra::Base
   register ScssInitializer
   use Rack::Deflater
 
@@ -11,8 +11,8 @@ class Inspiration < Sinatra::Base
   configure do
     RACK_ENV = (ENV['RACK_ENV'] || :development).to_sym
     connections = {
-      :development => "postgres://localhost/happynat",
-      :test => "postgres://postgres@localhost/happynat_test",
+      :development => "postgres://localhost/ringclub",
+      :test => "postgres://postgres@localhost/ringclub_test",
       :production => ENV['DATABASE_URL']
     }
 
