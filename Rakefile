@@ -11,7 +11,7 @@ namespace :db do
   end
 end
 
-task :default do
+task :default => ["db:load_config"] do
   puts "No tests written."
 end
 
@@ -22,4 +22,29 @@ end
 
 desc "Do some cron things"
 task :cron => ["db:load_config"] do
+  require 'rss'
+  require 'open-uri'
+
+  open('./feeds.txt') do |f|
+    f.readlines.each do |l|
+      url = l.strip
+      open(url) do |rss|
+        feed = RSS::Parser.parse(rss)
+        type = feed.feed_type.to_sym
+        if type.eql? :atom
+          puts "Title: #{feed.title.content}"
+        elsif type.eql? :rss
+          puts "Title: #{feed.channel.title}"
+        end
+
+        feed.items.each do |item|
+          if type.eql? :atom
+            puts " - Item: #{item.title.content}"
+          elsif type.eql? :rss
+            puts " - Item: #{item.title}"
+          end
+        end
+      end
+    end
+  end
 end
