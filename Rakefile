@@ -39,9 +39,9 @@ task :cron => ["db:load_config"] do
 
         feed.items.each do |item|
           if type.eql? :atom
-            puts " - Item: #{item.title.content}"
+            puts " - Item: #{item.title.content}, #{item.link.href}, #{item.content.content.length}"
           elsif type.eql? :rss
-            puts " - Item: #{item.title}"
+            puts " - Item: #{item.title}, #{item.link}, #{item.description.length}"
           end
         end
       end
