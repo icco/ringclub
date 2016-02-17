@@ -2,16 +2,15 @@ require "rubygems"
 require "bundler"
 RACK_ENV = (ENV['RACK_ENV'] || :development).to_sym
 Bundler.require(:default, RACK_ENV)
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
 require "rss"
 require "set"
 require "logger"
 
-require "./lib/logging.rb"
-require "./lib/scss_init.rb"
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
 class RingClub < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
   register ScssInitializer
   use Rack::Deflater
 
