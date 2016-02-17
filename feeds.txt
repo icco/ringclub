@@ -1,0 +1,3 @@
+https://writing.natwelch.com/feed.atom
+http://kamalmarhubi.com/blog/feed.xml
+http://redlua.com/index.xml
